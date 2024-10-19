@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Brinquedos</title>
+</head>
+<body>
+<h1>Lista de Brinquedos</h1>
+<a href="/brinquedos/novo">Novo Brinquedo</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Preço</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="brinquedo : ${brinquedos}">
+        <tr>
+            <td th:text="${brinquedo.id}"></td>
+            <td th:text="${brinquedo.nome}"></td>
+            <td th:text="${brinquedo.descricao}"></td>
+            <td th:text="${brinqu
