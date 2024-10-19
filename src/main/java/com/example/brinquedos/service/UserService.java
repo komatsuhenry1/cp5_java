@@ -18,22 +18,20 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    // Implementação do método loadUserByUsername da interface UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username); // Busca o usuário pelo nome de usuário
-        if (user != null) { // Verifica se o usuário não é nulo
+        User user = userRepository.findByUsername(username);
+        if (user != null) {
             return org.springframework.security.core.userdetails.User.builder()
-                    .username(user.getUsername()) // Obtém o nome de usuário
-                    .password(user.getPassword()) // Obtém a senha
-                    .authorities(new ArrayList<>()) // Adicione suas authorities aqui se necessário
+                    .username(user.getUsername())
+                    .password(user.getPassword())
+                    .authorities(new ArrayList<>())
                     .build();
         } else {
-            throw new UsernameNotFoundException("User not found: " + username); // Lança exceção se não encontrado
+            throw new UsernameNotFoundException("User not found: " + username);
         }
     }
 
-    // Métodos adicionais para manipulação de usuários
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }

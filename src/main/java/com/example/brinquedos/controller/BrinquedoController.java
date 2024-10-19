@@ -1,9 +1,9 @@
 package com.example.brinquedos.controller;
 
 import com.example.brinquedos.entity.Brinquedo;
-import com.example.brinquedos.entity.User; // Importa a entidade User
+import com.example.brinquedos.entity.User;
 import com.example.brinquedos.repository.BrinquedoRepository;
-import com.example.brinquedos.repository.UserRepository; // Importa o repositório de User
+import com.example.brinquedos.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,19 +19,19 @@ public class BrinquedoController {
     private BrinquedoRepository brinquedoRepository;
 
     @Autowired
-    private UserRepository userRepository; // Adiciona o repositório de usuários
+    private UserRepository userRepository;
 
     @GetMapping
     public String listarBrinquedos(Model model) {
         List<Brinquedo> brinquedos = brinquedoRepository.findAll();
         model.addAttribute("brinquedos", brinquedos);
-        return "brinquedos/listar";  // Template de listagem
+        return "brinquedos/listar";
     }
 
     @GetMapping("/novo")
     public String novoBrinquedo(Model model) {
         model.addAttribute("brinquedo", new Brinquedo());
-        return "brinquedos/form";  // Formulário para criar/editar brinquedo
+        return "brinquedos/form";
     }
 
     @PostMapping
@@ -44,7 +44,7 @@ public class BrinquedoController {
     public String editarBrinquedo(@PathVariable Long id, Model model) {
         Brinquedo brinquedo = brinquedoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Brinquedo inválido: " + id));
         model.addAttribute("brinquedo", brinquedo);
-        return "brinquedos/form";  // Formulário para editar brinquedo
+        return "brinquedos/form";
     }
 
     @PostMapping("/{id}")
@@ -60,15 +60,15 @@ public class BrinquedoController {
         return "redirect:/brinquedos";
     }
 
-    @GetMapping("/signup") // Mapeia a rota de cadastro
+    @GetMapping("/signup")
     public String showSignupForm(Model model) {
-        model.addAttribute("user", new User()); // Adiciona um novo objeto User ao modelo
-        return "signup"; // Retorna a página de signup
+        model.addAttribute("user", new User());
+        return "signup";
     }
 
-    @PostMapping("/signup") // Mapeia a requisição POST para signup
+    @PostMapping("/signup")
     public String registerUser(@ModelAttribute User user) {
-        userRepository.save(user); // Salva o novo usuário no banco de dados
-        return "redirect:/login"; // Redireciona para a página de login
+        userRepository.save(user);
+        return "redirect:/login";
     }
 }

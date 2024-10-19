@@ -15,7 +15,6 @@ public class Brinquedo {
     private String descricao;
     private double preco;
 
-    // Getters e Setters
     public Long getId() {
         return id;
     }

@@ -14,9 +14,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final UserService userService; // Declare o UserService
+    private final UserService userService;
 
-    // Construtor para injeção de dependência
+
     public SecurityConfig(UserService userService) {
         this.userService = userService;
     }
@@ -25,13 +25,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests()
-                .requestMatchers("/login", "/signup").permitAll() // Permite acesso a /login e /signup
-                .requestMatchers("/brinquedos").permitAll() // Permite acesso ao endpoint /brinquedos
-                .anyRequest().authenticated() // Exige autenticação para todas as outras requisições
+                .requestMatchers("/login", "/signup").permitAll()
+                .requestMatchers("/brinquedos").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login") // Define a página de login
-                .defaultSuccessUrl("/brinquedos", true) // Redireciona para /brinquedos após login bem-sucedido
+                .loginPage("/login")
+                .defaultSuccessUrl("/brinquedos", true)
                 .permitAll()
                 .and()
                 .logout()
@@ -42,7 +42,7 @@ public class SecurityConfig {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userService); // Define o UserDetailsService
+        provider.setUserDetailsService(userService);
         return provider;
     }
 }

@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
-@NoArgsConstructor // Adiciona o construtor sem parâmetros
+@NoArgsConstructor
 public class BrinquedoDTO {
 
     @NotNull
@@ -29,7 +29,6 @@ public class BrinquedoDTO {
         this.preco = brinquedo.getPreco();
     }
 
-    // Getters e Setters
     public Long getId() {
         return id;
     }
